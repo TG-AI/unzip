@@ -83,3 +83,11 @@ You can use /rename command after receiving file to rename it with custom thumbn
 Free users only 1 request per 30 minutes.
 /upgrade or Try 1800 seconds later."""
     SLOW_URL_DECED = "Gosh that seems to be a very slow URL. Since you were screwing my home, I am in no mood to download this file. Meanwhile, why don't you try this:==> https://shrtz.me/PtsVnf6 and get me a fast URL so that I can upload to Telegram, without me slowing down for other users."
+    IFLONG_FILE_NAME = """File Name limit allowed by Telegram is {alimit} characters.
+The given file name has {num} characters.
+
+<code>Essays Not allowed in Telegram file name!</code>
+
+©️ <b>@RenamerZBot</b>
+
+Please short your file name and try again!"""
