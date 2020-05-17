@@ -91,7 +91,7 @@ async def unzip(bot, update):
                 # https://stackoverflow.com/a/26178369/4723940
             except:
                 try:
-                    os.remove(saved_file_path)
+                    #os.remove(saved_file_path)
                     shutil.rmtree(extract_dir_path)
                 except:
                     pass
