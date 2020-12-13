@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# (c) Shrimadhav U K
+
 # the logging things
 import logging
 logging.basicConfig(level=logging.DEBUG,
@@ -8,12 +12,12 @@ import os
 import shutil
 import subprocess
 import time
-from helper_funcs.display_progress import humanbytes, progress_for_pyrogram
+
 # the secret configuration specific things
 if bool(os.environ.get("WEBHOOK", False)):
     from sample_config import Config
 else:
-    from sample_config import Config
+    from config import Config
 
 # the Strings used for this "thing"
 from translation import Translation
@@ -28,7 +32,7 @@ from helper_funcs.display_progress import progress_for_pyrogram, humanbytes
 @pyrogram.Client.on_message(pyrogram.Filters.command(["unzip"]))
 async def unzip(bot, update):
     TRChatBase(update.from_user.id, update.text, "unzip")
-    if str(update.from_user.id) in Config.AUTH_USERS:
+    if str(update.from_user.id) not in Config.SUPER7X_DLBOT_USERS:
         await bot.send_message(
             chat_id=update.chat.id,
             text=Translation.NOT_AUTH_USER_TEXT,
@@ -91,18 +95,18 @@ async def unzip(bot, update):
                 # https://stackoverflow.com/a/26178369/4723940
             except:
                 try:
-                    #os.remove(saved_file_path)
+                    os.remove(saved_file_path)
                     shutil.rmtree(extract_dir_path)
                 except:
                     pass
-              #  await bot.edit_message_text(
-                 #   chat_id=update.chat.id,
-                 #   text=Translation.EXTRACT_ZIP_ERRS_OCCURED,
-                #    disable_web_page_preview=True,
-             #       parse_mode="html",
-           #         message_id=a.message_id
-       #         )
-      #      else:
+                await bot.edit_message_text(
+                    chat_id=update.chat.id,
+                    text=Translation.EXTRACT_ZIP_ERRS_OCCURED,
+                    disable_web_page_preview=True,
+                    parse_mode="html",
+                    message_id=a.message_id
+                )
+            else:
                 os.remove(saved_file_path)
                 inline_keyboard = []
                 zip_file_contents = os.listdir(extract_dir_path)
